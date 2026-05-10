@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - ALUGOLD ENTERPRISE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        dark: '#0F0F0F',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white text-dark font-sans">
+    <!-- Navbar -->
+    <nav class="bg-dark text-white p-4 fixed w-full z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-gold font-bold text-xl">ALUGOLD</div>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="index.html" class="hover:text-gold">Home</a></li>
+                <li><a href="index.html#services" class="hover:text-gold">Services</a></li>
+                <li><a href="booking.html" class="hover:text-gold">Booking</a></li>
+                <li><a href="index.html#about" class="hover:text-gold">About</a></li>
+                <li><a href="shop.html" class="hover:text-gold">Shop</a></li>
+                <li><a href="index.html#contact" class="hover:text-gold">Contact</a></li>
+            </ul>
+            <a href="index.html#contact" class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Get Quote</a>
+        </div>
+    </nav>
+
+    <!-- Shop Section -->
+    <section class="pt-20 pb-16">
+        <div class="container mx-auto">
+            <h1 class="text-4xl font-bold text-center mb-12 text-dark">Shop Our Materials</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Aluminum Sheets</h3>
+                    <p class="text-gray-600 mb-4">High-quality aluminum sheets for cladding.</p>
+                    <p class="text-gold font-bold mb-4">$50 per sheet</p>
+                    <button class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Add to Cart</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Sliding Door Hardware</h3>
+                    <p class="text-gray-600 mb-4">Durable hardware for sliding doors.</p>
+                    <p class="text-gold font-bold mb-4">$100 per set</p>
+                    <button class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Add to Cart</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Window Frames</h3>
+                    <p class="text-gray-600 mb-4">Custom window frames in various sizes.</p>
+                    <p class="text-gold font-bold mb-4">$200 per frame</p>
+                    <button class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Add to Cart</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Curtain Wall Panels</h3>
+                    <p class="text-gray-600 mb-4">Glass and aluminum panels for curtain walls.</p>
+                    <p class="text-gold font-bold mb-4">$300 per panel</p>
+                    <button class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Add to Cart</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Alucobond Sheets</h3>
+                    <p class="text-gray-600 mb-4">Composite panels for cladding.</p>
+                    <p class="text-gold font-bold mb-4">$75 per sheet</p>
+                    <button class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Add to Cart</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Maintenance Kits</h3>
+                    <p class="text-gray-600 mb-4">Tools and materials for maintenance.</p>
+                    <p class="text-gold font-bold mb-4">$150 per kit</p>
+                    <button class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2023 ALUGOLD ENTERPRISE. All rights reserved.</p>
+            <ul class="flex justify-center space-x-6 mt-4">
+                <li><a href="index.html" class="hover:text-gold">Home</a></li>
+                <li><a href="index.html#services" class="hover:text-gold">Services</a></li>
+                <li><a href="booking.html" class="hover:text-gold">Booking</a></li>
+                <li><a href="index.html#about" class="hover:text-gold">About</a></li>
+                <li><a href="shop.html" class="hover:text-gold">Shop</a></li>
+                <li><a href="index.html#contact" class="hover:text-gold">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Services - ALUGOLD ENTERPRISE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        dark: '#0F0F0F',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white text-dark font-sans">
+    <!-- Navbar -->
+    <nav class="bg-dark text-white p-4 fixed w-full z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-gold font-bold text-xl">ALUGOLD</div>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="index.html" class="hover:text-gold">Home</a></li>
+                <li><a href="index.html#services" class="hover:text-gold">Services</a></li>
+                <li><a href="booking.html" class="hover:text-gold">Booking</a></li>
+                <li><a href="index.html#about" class="hover:text-gold">About</a></li>
+                <li><a href="shop.html" class="hover:text-gold">Shop</a></li>
+                <li><a href="index.html#contact" class="hover:text-gold">Contact</a></li>
+            </ul>
+            <a href="index.html#contact" class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Get Quote</a>
+        </div>
+    </nav>
+
+    <!-- Booking Section -->
+    <section class="pt-20 pb-16">
+        <div class="container mx-auto">
+            <h1 class="text-4xl font-bold text-center mb-12 text-dark">Book Our Services</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Exterior Cladding Consultation</h3>
+                    <p class="text-gray-600 mb-4">Schedule a consultation for cladding systems.</p>
+                    <button class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Book Now</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Sliding Door Installation</h3>
+                    <p class="text-gray-600 mb-4">Book installation for sliding doors.</p>
+                    <button class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Book Now</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Window Fabrication</h3>
+                    <p class="text-gray-600 mb-4">Reserve custom window fabrication.</p>
+                    <button class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Book Now</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Curtain Wall Systems</h3>
+                    <p class="text-gray-600 mb-4">Book consultation for curtain walls.</p>
+                    <button class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Book Now</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Alucobond Cladding</h3>
+                    <p class="text-gray-600 mb-4">Schedule Alucobond cladding service.</p>
+                    <button class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Book Now</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Maintenance Services</h3>
+                    <p class="text-gray-600 mb-4">Book maintenance appointments.</p>
+                    <button class="bg-gold text-dark px-4 py-2 rounded hover:bg-yellow-500">Book Now</button>
+                </div>
+            </div>
+            <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 text-dark">Booking Form</h2>
+                <form>
+                    <input type="text" placeholder="Name" class="w-full p-4 mb-4 border rounded-lg">
+                    <input type="email" placeholder="Email" class="w-full p-4 mb-4 border rounded-lg">
+                    <select class="w-full p-4 mb-4 border rounded-lg">
+                        <option>Select Service</option>
+                        <option>Exterior Cladding</option>
+                        <option>Sliding Door Installation</option>
+                        <option>Window Fabrication</option>
+                        <option>Curtain Wall Systems</option>
+                        <option>Alucobond Cladding</option>
+                        <option>Maintenance Services</option>
+                    </select>
+                    <input type="date" class="w-full p-4 mb-4 border rounded-lg">
+                    <button type="submit" class="bg-gold text-dark px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-500 w-full">Submit Booking</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2023 ALUGOLD ENTERPRISE. All rights reserved.</p>
+            <ul class="flex justify-center space-x-6 mt-4">
+                <li><a href="index.html" class="hover:text-gold">Home</a></li>
+                <li><a href="index.html#services" class="hover:text-gold">Services</a></li>
+                <li><a href="booking.html" class="hover:text-gold">Booking</a></li>
+                <li><a href="index.html#about" class="hover:text-gold">About</a></li>
+                <li><a href="shop.html" class="hover:text-gold">Shop</a></li>
+                <li><a href="index.html#contact" class="hover:text-gold">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
