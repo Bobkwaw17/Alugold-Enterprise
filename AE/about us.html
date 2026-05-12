@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#415ba4",
+                    "surface-container-high": "#e8e8e8",
+                    "surface-container-low": "#f3f3f4",
+                    "tertiary-container": "#97b0ff",
+                    "primary-container": "#d4af37",
+                    "on-primary-container": "#554300",
+                    "surface-container": "#eeeeee",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "outline": "#7f7663",
+                    "inverse-primary": "#e9c349",
+                    "on-background": "#1a1c1c",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#4d4635",
+                    "background": "#f9f9f9",
+                    "secondary-fixed": "#e5e2e1",
+                    "surface-variant": "#e2e2e2",
+                    "tertiary-fixed-dim": "#b4c5ff",
+                    "inverse-surface": "#2f3131",
+                    "on-tertiary-container": "#254188",
+                    "on-tertiary-fixed-variant": "#27438a",
+                    "on-primary-fixed-variant": "#574500",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#dadada",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "tertiary-fixed": "#dbe1ff",
+                    "on-surface": "#1a1c1c",
+                    "secondary-container": "#e5e2e1",
+                    "on-secondary-fixed-variant": "#474646",
+                    "on-tertiary-fixed": "#00174b",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#e9c349",
+                    "surface-bright": "#f9f9f9",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "surface": "#f9f9f9",
+                    "secondary": "#5f5e5e",
+                    "primary-fixed": "#ffe088",
+                    "primary": "#735c00",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#735c00",
+                    "outline-variant": "#d0c5af",
+                    "on-secondary-container": "#656464",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-primary-fixed": "#241a00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "section-padding": "80px",
+                    "base-unit": "8px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "20px",
+                    "container-max-width": "1280px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["metropolis", "sans-serif"],
+                    "display-lg-mobile": ["metropolis", "sans-serif"],
+                    "display-lg": ["metropolis", "sans-serif"],
+                    "label-caps": ["Inter", "sans-serif"],
+                    "cta-label": ["metropolis", "sans-serif"],
+                    "headline-sm": ["metropolis", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"],
+                    "body-lg": ["Inter", "sans-serif"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "cta-label": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    vertical-align: middle
+    }
+.bg-hero-pattern {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuB8a13c_2DqbtB7cZZlOhilkple-7UjEvT_y93VkCz9c_qmEj31ytb6cl6RcFtb38wMoNbuV8nxZ_VRLQgKaQDNtCtZJUfPWufKr1hoyDQCOBCCqrDyu3jg53_ArvgiV88MH2ykr2_de772aiU8KpVpKhnjM97zGgMrfq5CtILYCkUJlkDIQRxPk2WGWtPsyriCoQsm1f1bRF_2gKUlC50-7HNYfYnI2AXfDcl_Jj4b4Ot9hNvNKP7w_XeukYCaRS2tXSqpz_Fxcn85);
+    background-size: cover;
+    background-position: center
+    }</style>
+</head>
+<body class="bg-background text-on-surface font-body-md">
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant/30 dark:border-outline/20 docked full-width top-0 sticky z-50">
+<nav class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-on-surface dark:text-on-surface">ALUGOLD</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-cta-label text-cta-label text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors" href="#">Home</a>
+<a class="font-cta-label text-cta-label text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors" href="#">Services</a>
+<a class="font-cta-label text-cta-label text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors" href="#">Shop</a>
+<a class="font-cta-label text-cta-label text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1" href="#">About</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-3 font-cta-label text-cta-label hover:bg-primary transition-all duration-300">
+                Get Quote
+            </button>
+</nav>
+</header>
+<main>
+<!-- Hero Section: About the Team -->
+<section class="relative bg-hero-pattern py-section-padding border-b border-outline-variant/20 overflow-hidden">
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div>
+<span class="font-label-caps text-label-caps text-primary mb-4 block">OUR HERITAGE &amp; VISION</span>
+<h1 class="font-display-lg text-display-lg mb-6 text-on-surface">Precision Engineering Meets Architectural Artistry</h1>
+<p class="font-body-lg text-body-lg text-secondary mb-8 max-w-xl">
+                            At ALUGOLD ENTERPRISE, we don't just build; we craft. Our team of master engineers and designers specialize in premium aluminum and glass solutions that define the skyline of luxury.
+                        </p>
+<div class="flex gap-4">
+<div class="border-l-2 border-primary pl-4">
+<p class="font-headline-sm text-headline-sm">15+</p>
+<p class="font-label-caps text-label-caps text-secondary">Years Excellence</p>
+</div>
+<div class="border-l-2 border-primary pl-4">
+<p class="font-headline-sm text-headline-sm">500+</p>
+<p class="font-label-caps text-label-caps text-secondary">Premium Projects</p>
+</div>
+</div>
+</div>
+<div class="relative">
+<img alt="ALUGOLD Team" class="w-full aspect-[4/3] object-cover shadow-2xl rounded-none border border-outline-variant/30" data-alt="A professional architectural engineering team reviewing high-end blueprints in a sun-drenched, modern glass-walled office. The lighting is crisp and natural, highlighting technical precision and luxury materials. The overall aesthetic is clean, corporate, and minimalist, emphasizing engineering excellence and high-net-worth architectural standards." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChRMkYuOIXLPaIE-qBh_mDHnI87RRp642QbvwdfAUpWaq2twpdBg3bLYqgPMRcTfTHnpzJ8WRlH8wipcr7qyLeUe85VvM06b-JhZT05S67mL-BSgdAhRAoK7zQ-K1dB2AlNVHx6m7qDXY-TVFWbhplIKEHNCLFYyYsDOuOm1GmKxgmTjCTHdhQsCJ3ozKocqzn0OxtIivlDIWjkzsDa2yD-mVd-4oPtBkQ4wJFU5JU3oTR6JsF5ie1UulNYj2lwx21eQ3S_XkhwPQk"/>
+<div class="absolute -bottom-6 -left-6 bg-inverse-surface p-8 hidden md:block">
+<p class="text-surface font-headline-sm text-headline-sm">Quality Standards</p>
+<p class="text-secondary-fixed-dim font-body-md text-body-md mt-2">ISO 9001 Certified Installation</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Excellence Bento Grid -->
+<section class="py-section-padding bg-surface">
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Excellence in Every Detail</h2>
+<p class="font-body-md text-body-md text-secondary">The ALUGOLD standard of architectural integrity.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Installation Excellence -->
+<div class="md:col-span-2 bg-white p-10 border border-outline-variant/30 flex flex-col justify-between hover:shadow-lg transition-all duration-300">
+<div>
+<span class="material-symbols-outlined text-primary text-4xl mb-6">architecture</span>
+<h3 class="font-headline-sm text-headline-sm mb-4">Master-Grade Installation</h3>
+<p class="font-body-md text-body-md text-secondary mb-6">Our installation protocols exceed industry standards, utilizing specialized laser-alignment technology and premium-grade sealants to ensure thermal efficiency and structural longevity.</p>
+</div>
+<img alt="Precision Installation" class="w-full h-48 object-cover mt-4" data-alt="Close-up detail of a high-end aluminum window frame installation in a contemporary luxury villa. Soft morning light catches the metallic finish and the precision of the joints. The scene communicates high-quality craftsmanship, technical expertise, and an obsessive attention to architectural detail in a minimalist setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCacGX8jhOvFklhFktz53nHzGqVHY4Nlp8OJkwZk8c1m9So-jh4uhUOFIIx20ZhghCkZM2R-nZkdTk3QzA0cs8EdzVnj-MIUdpwg3OELAeRV9OaFWqBDD0xJAW1dBI-QDka4c8bXlIRt5tiX2jZqF6fFEolWlj-2Zac7GkI5_IHkrBWomUvltaTyrnz_eK17b33RPYB1nuUfV0jV7MXPwYhiWpN-h7XpAFiwvccJRERGPI_251IKVr6D1_mN21NVSpwvxTKPGTpAl4p"/>
+</div>
+<!-- Material Quality -->
+<div class="bg-inverse-surface p-10 text-surface flex flex-col justify-between hover:shadow-lg transition-all duration-300">
+<div>
+<span class="material-symbols-outlined text-primary-fixed text-4xl mb-6">verified</span>
+<h3 class="font-headline-sm text-headline-sm mb-4">Elite Materials</h3>
+<p class="font-body-md text-body-md text-secondary-fixed-dim">Sourcing only high-tensile architectural aluminum and acoustic-treated glass for ultimate performance.</p>
+</div>
+<div class="mt-8 border-t border-secondary py-4">
+<p class="font-label-caps text-label-caps">100% Recyclable</p>
+<p class="font-label-caps text-label-caps mt-2">UV Resistant Coatings</p>
+</div>
+</div>
+<!-- Sustainable Design -->
+<div class="bg-surface-container-low p-10 border border-outline-variant/30 hover:shadow-lg transition-all duration-300">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">eco</span>
+<h3 class="font-headline-sm text-headline-sm mb-4">Sustainable Legacy</h3>
+<p class="font-body-md text-body-md text-secondary">Our systems are engineered to minimize carbon footprints while maximizing natural lighting efficiency in high-density urban environments.</p>
+</div>
+<!-- Global Reach -->
+<div class="md:col-span-2 bg-white p-10 border border-outline-variant/30 flex items-center gap-8 hover:shadow-lg transition-all duration-300">
+<div class="w-1/2">
+<h3 class="font-headline-sm text-headline-sm mb-4">Bespoke Fabrication</h3>
+<p class="font-body-md text-body-md text-secondary">Every project is unique. Our in-house fabrication facility ensures that custom dimensions and finishes are achieved with zero tolerance for error.</p>
+</div>
+<div class="w-1/2">
+<img alt="Fabrication" class="w-full h-40 object-cover" data-alt="A clean, industrial-modern fabrication facility with high-tech machinery processing aluminum profiles. The atmosphere is professional and organized, with cool blue and white lighting reflecting off metallic surfaces. This visual represents technological sophistication and the precision of bespoke architectural manufacturing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi8EwKISflsTcyzhg-FLYK-3qaQ35r5ykmbGAfRgKr6akUjFGWv20bZOMgnpX_7JcngjiUQ9fBTSjHuBQp1A_svSdr7B1PFCNGPJIgf92Ss234Lsu1nV8dGpcTNYzjND8M1yHrEcQFxiEQXkUF6xY_hqzK_huSIUk0JTFLOwWaExjroAZ5huOh_htmEYJ7liDNPIUrb1bK6-rQwh_EZ3VlMZJC7-7kiD4dcqDBlUVsZDByLiioJy303s7BLolj-FjJZQvIn9joRzXm"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Membership / Client Portal Section -->
+<section class="py-section-padding bg-surface-container-lowest border-t border-outline-variant/30">
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+<div>
+<span class="font-label-caps text-label-caps text-primary mb-4 block">CLIENT EXCLUSIVE</span>
+<h2 class="font-display-lg text-display-lg text-on-surface">The Gold Standard Portal</h2>
+<p class="font-body-md text-body-md text-secondary mt-2">Managing your architectural journey with professional precision.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-inverse-surface text-surface font-cta-label text-cta-label hover:bg-on-surface transition-colors">Client Login</button>
+<button class="px-6 py-3 border border-outline text-on-surface font-cta-label text-cta-label hover:bg-surface-container transition-colors">Register Project</button>
+</div>
+</div>
+<!-- Dashboard Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Sidebar Actions (Mobile scrollable, Desktop fixed) -->
+<aside class="lg:col-span-3 space-y-4">
+<div class="bg-white border border-outline-variant/30 p-6">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 bg-primary-container flex items-center justify-center rounded-full">
+<span class="material-symbols-outlined text-on-primary-container">person</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm">Arthur Sterling</p>
+<p class="font-label-caps text-label-caps text-secondary">Premium Partner</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 p-3 bg-surface-container text-primary font-cta-label text-cta-label" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+                                </a>
+<a class="flex items-center gap-3 p-3 text-secondary hover:bg-surface-container-low transition-colors font-cta-label text-cta-label" href="#">
+<span class="material-symbols-outlined">query_stats</span> Project Tracking
+                                </a>
+<a class="flex items-center gap-3 p-3 text-secondary hover:bg-surface-container-low transition-colors font-cta-label text-cta-label" href="#">
+<span class="material-symbols-outlined">settings</span> User Preferences
+                                </a>
+<a class="flex items-center gap-3 p-3 text-secondary hover:bg-surface-container-low transition-colors font-cta-label text-cta-label" href="#">
+<span class="material-symbols-outlined">support_agent</span> Personalized Support
+                                </a>
+</nav>
+</div>
+</aside>
+<!-- Main Dashboard Content -->
+<div class="lg:col-span-9 space-y-8">
+<!-- Project Tracking -->
+<div class="bg-white border border-outline-variant/30 p-8">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm">Active Project Tracking</h3>
+<span class="bg-primary-container text-on-primary-container px-3 py-1 font-label-caps text-label-caps">In Progress</span>
+</div>
+<div class="mb-8">
+<p class="font-body-md text-body-md font-bold text-on-surface">The Meridian Penthouse - Phase 3: Glazing</p>
+<div class="w-full bg-surface-container h-2 mt-4 overflow-hidden">
+<div class="bg-primary h-full w-[65%]"></div>
+</div>
+<div class="flex justify-between mt-2">
+<p class="font-label-caps text-label-caps text-secondary">Structural Fit-out</p>
+<p class="font-label-caps text-label-caps text-primary">65% Completed</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-4 border border-outline-variant/20 bg-surface-container-lowest">
+<p class="font-label-caps text-label-caps text-secondary mb-1">NEXT MILESTONE</p>
+<p class="font-body-md text-body-md font-bold">Acoustic Testing</p>
+<p class="font-label-caps text-label-caps text-primary mt-2">Oct 14, 2024</p>
+</div>
+<div class="p-4 border border-outline-variant/20 bg-surface-container-lowest">
+<p class="font-label-caps text-label-caps text-secondary mb-1">DOCUMENTS</p>
+<p class="font-body-md text-body-md font-bold">Compliance Certs</p>
+<button class="text-primary font-cta-label text-cta-label flex items-center gap-1 mt-2">View <span class="material-symbols-outlined text-sm">open_in_new</span></button>
+</div>
+<div class="p-4 border border-outline-variant/20 bg-surface-container-lowest">
+<p class="font-label-caps text-label-caps text-secondary mb-1">SITE UPDATES</p>
+<p class="font-body-md text-body-md font-bold">12 New Photos</p>
+<button class="text-primary font-cta-label text-cta-label flex items-center gap-1 mt-2">Gallery <span class="material-symbols-outlined text-sm">image</span></button>
+</div>
+</div>
+</div>
+<!-- Service Portal Features -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="bg-white border border-outline-variant/30 p-8 hover:border-primary transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">psychology</span>
+<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm mb-2">Personalized Service Portal</h4>
+<p class="font-body-md text-body-md text-secondary">Direct access to your dedicated architectural consultant and custom design iterations.</p>
+</div>
+<div class="bg-white border border-outline-variant/30 p-8 hover:border-primary transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">tune</span>
+<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">arrow_forward</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm mb-2">User Preferences</h4>
+<p class="font-body-md text-body-md text-secondary">Curate your material library, saved finishes, and notification triggers for site milestones.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Support CTA -->
+<section class="bg-inverse-surface py-20 text-center">
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+<h2 class="font-headline-md text-headline-md text-surface mb-6">Require Immediate Consultation?</h2>
+<p class="font-body-lg text-body-lg text-secondary-fixed-dim mb-10 max-w-2xl mx-auto">Our senior project directors are available for private consultations regarding large-scale architectural implementations.</p>
+<div class="flex justify-center gap-6">
+<button class="bg-primary text-surface px-10 py-4 font-cta-label text-cta-label hover:bg-primary-container transition-all">Priority Line</button>
+<button class="border border-secondary text-surface px-10 py-4 font-cta-label text-cta-label hover:bg-on-surface transition-all">Message Portal</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-inverse-surface dark:bg-surface-container-lowest border-t border-outline/20">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter py-section-padding px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<div class="md:col-span-4">
+<div class="font-headline-sm text-headline-sm text-surface dark:text-on-surface mb-6">ALUGOLD</div>
+<p class="text-secondary-fixed-dim dark:text-secondary font-body-md text-body-md mb-8">Architectural Excellence Guaranteed. Defining the future of premium construction since 2009.</p>
+</div>
+<div class="md:col-span-2">
+<h5 class="font-label-caps text-label-caps text-primary-fixed dark:text-primary mb-6">Navigation</h5>
+<ul class="space-y-4">
+<li><a class="text-secondary-fixed-dim dark:text-secondary hover:text-primary-fixed transition-colors hover:underline decoration-primary-fixed underline-offset-4" href="#">Privacy Policy</a></li>
+<li><a class="text-secondary-fixed-dim dark:text-secondary hover:text-primary-fixed transition-colors hover:underline decoration-primary-fixed underline-offset-4" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="md:col-span-3">
+<h5 class="font-label-caps text-label-caps text-primary-fixed dark:text-primary mb-6">Client Area</h5>
+<ul class="space-y-4">
+<li><a class="text-primary-fixed dark:text-primary font-bold hover:underline decoration-primary-fixed underline-offset-4" href="#">Project Tracking</a></li>
+<li><a class="text-secondary-fixed-dim dark:text-secondary hover:text-primary-fixed transition-colors hover:underline decoration-primary-fixed underline-offset-4" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div class="md:col-span-3">
+<h5 class="font-label-caps text-label-caps text-primary-fixed dark:text-primary mb-6">Newsletter</h5>
+<div class="flex border border-outline">
+<input class="bg-transparent border-none text-surface p-3 w-full focus:ring-0" placeholder="Email" type="email"/>
+<button class="bg-primary p-3 text-surface">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+<div class="md:col-span-12 mt-12 pt-8 border-t border-secondary">
+<p class="text-secondary-fixed-dim dark:text-secondary font-body-md text-body-md text-center">© 2024 ALUGOLD ENTERPRISE. Architectural Excellence Guaranteed.</p>
+</div>
+</div>
+</footer>
+</body></html>
