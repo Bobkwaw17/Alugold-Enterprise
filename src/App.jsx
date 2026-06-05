@@ -2,8 +2,8 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const Home = lazy(() => import("./pages/Home"));
-const NotFound  = lazy(() => import("./pages/NotFound"));
+const Home = lazy(() => import("./features/Home/Home"));
+const NotFound  = lazy(() => import("./NotFound"));
 
 const Load = ({ children }) => (
   <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
