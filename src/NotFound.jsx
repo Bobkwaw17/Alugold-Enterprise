@@ -1,4 +1,4 @@
-// src/pages/NotFound.tsx
+
 import { useRouteError, isRouteErrorResponse, Link } from "react-router-dom";
 
 export default function NotFound() {
