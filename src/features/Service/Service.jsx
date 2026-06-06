@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const service = () => {
+export default function service  () {
 	return (
-		<div>Service Page</div>
+		<div><p className="text-blue-500">Service Page </p></div>
 	)
 }
