@@ -1,7 +1,6 @@
-import React from 'react'
 
-export const About = () => {
+export default function service() {
 	return (
-		<div>About Page</div>
+		<div><p className="text-red-500">About Page </p></div>
 	)
 }
