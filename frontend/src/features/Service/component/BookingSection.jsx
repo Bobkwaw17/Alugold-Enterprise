@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Layers, Settings2, Grid2x2, Phone, Mail } from "lucide-react";
-import BookingCalendar from "./BookingCalendar";
+import BookingCalendar from "./calendar";
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
