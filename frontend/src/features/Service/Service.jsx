@@ -1,7 +1,13 @@
-import React from 'react'
+import ServiceHero from './component/ServiceHero'
+import ServiceCatalog from './component/ServiceCatalog'
+import BookingSection from './component/BookingSection'
 
-export default function service  () {
+export default function Service() {
 	return (
-		<div><p className="text-blue-500">Service Page </p></div>
+		<main className="bg-[#f9f9f9] text-[#1a1c1c]">
+			<ServiceHero />
+			<ServiceCatalog />
+			<BookingSection />
+		</main>
 	)
 }
