@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-// ─── Alugold design tokens (mirrors Tailwind config) ──────────────────────────
+
 const TOKEN = {
   primary: "#735c00",
   primaryContainer: "#d4af37",
@@ -46,16 +46,7 @@ const MONTH_NAMES = [
   "July","August","September","October","November","December",
 ];
 
-// ─── Component ────────────────────────────────────────────────────────────────
-/**
- * BookingCalendar
- *
- * Props:
- *   value        – Date | null   currently selected date
- *   onChange     – (Date) => void
- *   minDate      – Date          earliest selectable date (defaults to today)
- *   disabledDates – Date[]       explicit disabled dates
- */
+
 export default function BookingCalendar({
   value = null,
   onChange,
@@ -260,7 +251,7 @@ export default function BookingCalendar({
     return base;
   }
 
-  // ── Render ──────────────────────────────────────────────────────────────────
+
   return (
     <div style={s.wrapper}>
       {/* Header */}
@@ -339,49 +330,6 @@ export default function BookingCalendar({
           }).toUpperCase()}
         </div>
       )}
-    </div>
-  );
-}
-
-// ─── Demo wrapper (remove in production) ─────────────────────────────────────
-export function BookingCalendarDemo() {
-  const [date, setDate] = useState(null);
-
-  return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#f9f9f9",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 24,
-        padding: 32,
-        fontFamily: "Inter, sans-serif",
-      }}
-    >
-      {/* Google Fonts for demo */}
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Metropolis:wght@400;600;700;800&display=swap"
-        rel="stylesheet"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet"
-      />
-
-      <div style={{ fontSize: 10, letterSpacing: "0.1em", fontWeight: 700, color: "#735c00" }}>
-        02. PREFERRED DATE
-      </div>
-
-      <BookingCalendar value={date} onChange={setDate} />
-
-      <div style={{ fontSize: 12, color: "#5f5e5e", marginTop: 8 }}>
-        {date
-          ? `onChange fired → ${date.toISOString().slice(0, 10)}`
-          : "No date selected yet"}
-      </div>
     </div>
   );
 }
