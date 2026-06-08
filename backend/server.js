@@ -26,6 +26,6 @@ app.get("/",(req,res)=>{
 
 
 app.listen(Port,()=>{
-  console.log(`server running on 127.0.0.1${Port}`)
+  console.log(`server running on 127.0.0.1:${Port}`)
 
 })
