@@ -3,7 +3,7 @@ export default function Footer() {
 
   return (
     <footer className="flex w-screen min-h-10 bg-(--inverse-surface) text-(--surface)">
-      <div className="max-w-7xl w-full p-8 mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-4">
+      <div className="max-w-7xl w-full p-6 mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-4">
 
         <div className="flex flex-col gap-4 ">
           <h3 className="text-2xl font-semibold">ALUGOLD</h3>
