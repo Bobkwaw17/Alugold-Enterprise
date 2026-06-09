@@ -34,7 +34,7 @@ export default function Navbar() {
       </div>
 
       {/* Nav dropdown menu on smaller screens  */}
-      {isMenu && <BackDrop className={`lg:hidden`} setIsMenu={setIsMenu} />}
+      <AnimatePresence>{isMenu && <BackDrop className={`lg:hidden`} setIsMenu={setIsMenu} />}</AnimatePresence>
       <AnimatePresence>
         {isMenu && <motion.div
           initial={{ y: "-100%" }}
