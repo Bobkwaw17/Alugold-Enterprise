@@ -7,6 +7,7 @@ import connectDB from "./Configs/db.ts";
 import newsletterRoutes from "./Routes/newsletterRoutes";
 import projectRoutes from "./Routes/projectRoutes";
 import contactRoutes from "./Routes/contactRoutes";
+import serviceRoutes from "./Routes/serviceRoutes";
 
 const app = express();
 const Port = process.env.PORT || 4000;
@@ -19,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet())
 
 // custom routes
-
+app.use("/api/services", serviceRoutes);
 app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/contact", contactRoutes);
