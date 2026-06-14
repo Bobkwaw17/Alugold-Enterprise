@@ -3,7 +3,10 @@ import express, { NextFunction, Request, RequestHandler, Response } from "expres
 import cors from "cors";
 import morgan from "morgan";
 import helmet from "helmet"
-import connectDB from "./Configs/db.js";
+import connectDB from "./Configs/db.ts";
+import newsletterRoutes from "./Routes/newsletterRoutes";
+import projectRoutes from "./Routes/projectRoutes";
+import contactRoutes from "./Routes/contactRoutes";
 
 const app = express();
 const Port = process.env.PORT || 4000;
@@ -14,7 +17,15 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet())
+
+// custom routes
+
+app.use("/api/newsletter", newsletterRoutes);
+app.use("/api/projects", projectRoutes);
+app.use("/api/contact", contactRoutes);
+
 // routes
+
 const homeHandler: RequestHandler = (req: Request, res: Response) => {
   res.json({ status: "success", data: { message: "server is active" } });
 };
