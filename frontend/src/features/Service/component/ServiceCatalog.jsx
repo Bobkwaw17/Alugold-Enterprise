@@ -49,15 +49,16 @@ export default function ServiceCatalog() {
 	return (
 		<section className="mx-auto max-w-7xl px-5 pb-20 lg:px-16">
 			<div className="grid grid-cols-1 gap-6 md:grid-cols-12">
-				<ServiceCard
-					className="md:col-span-8"
+				<div className="md:col-span-8">
+                                       <ServiceCard
 					image={serviceCards[0].image}
 					imageAlt={serviceCards[0].imageAlt}
 					category={serviceCards[0].category}
 					title={serviceCards[0].title}
 					description={serviceCards[0].description}
 					icon={serviceCards[0].icon}
-				/>
+				        />
+                                </div>
 				<div className="md:col-span-4">
 					<ServiceCard {...serviceCards[1]} />
 				</div>
