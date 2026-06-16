@@ -46,7 +46,7 @@ export default function Footer() {
           <h4 className="font-semibold text-(--primary) ">Newsletter</h4>
           <div className="flex flex-col gap-4">
             <div className="flex gap-2 items-center ">
-              <input type="text" placeholder="Your Email" className="p-2 bg-(--surface-container) text-(--on-surface) border border-(--outline)/20" />
+              <input type="text" placeholder="Your Email" className="p-2 bg-(--surface-container) text-(--on-surface) w-full border border-(--outline)/20" />
               <Button className={`p-3.5 flex items-center justify-center`} type="primary">
                 <SendHorizonal size={15} />
               </Button>
