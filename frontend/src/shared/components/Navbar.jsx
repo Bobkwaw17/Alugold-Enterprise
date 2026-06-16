@@ -3,6 +3,7 @@ import { Menu } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import BackDrop from "./BackDrop";
 import { useState } from "react";
+import Button from "./Button";
 
 export default function Navbar() {
 
@@ -21,15 +22,25 @@ export default function Navbar() {
 
         {/* Middle part fo the navbar */}
         <div className="md:flex items-center justify-center gap-6 flex-1 hidden">
-          <Link to="/" className={`font-semibold text-(--on-surface-variant) h-6.5 ${currentRoute === "/" ? "border-b-2 border-outline" : ""}`}>Home</Link>
-          <Link to="/service" className={`font-semibold text-(--on-surface-variant) h-6.5 ${currentRoute === "/service" ? "border-b-2 border-outline" : ""}`}>Service</Link>
-          <Link to="/about" className={`font-semibold text-(--on-surface-variant) h-6.5 ${currentRoute === "/about" ? "border-b-2 border-outline" : ""}`}>About</Link>
+          <Link to="/" className={`
+            font-semibold h-6.5 hover:text-(--on-surface-variant)
+            ${currentRoute === "/" ? "border-b-2 border-(--outline) text-(--on-surface-variant)" : ""}`}>
+            Home</Link>
+          <Link to="/service" className={`
+            font-semibold h-6.5 hover:text-(--on-surface-variant)
+            ${currentRoute === "/service" ? "border-b-2 border-(--outline) text-(--on-surface-variant)" : ""}`}>
+            Service</Link>
+          <Link to="/about" className={`
+            font-semibold h-6.5 hover:text-(--on-surface-variant)
+            ${currentRoute === "/about" ? "border-b-2 border-(--outline) text-(--on-surface-variant)" : ""}`}>
+            About
+          </Link>
         </div>
 
         {/* Right part of the navbar */}
         <div className="flex flex-1 justify-end bg-white h-full items-center">
           {/* Hide quotes button and show hamburger menu on smaller screens */}
-          <button className="md:flex hidden py-2 px-6 cursor-pointer bg-(--primary) text-(--on-primary) font-semibold">Get Quote</button>
+          <Button className="md:flex hidden px-6 py-2" type="inverse-primary">Get Quote</Button>
           <button className="flex md:hidden cursor-pointer" onClick={() => { setIsMenu(prev => !prev) }}>
             <Menu />
           </button>
@@ -45,12 +56,27 @@ export default function Navbar() {
           exit={{ y: "-100%" }}
           transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.8 }}
           className={`
-            absolute top-17.5 h-60 w-full bg-white -z-1 md:hidden flex flex-col p-4 items-center justify-between text-(--on-surface-variant) font-semibold
+            absolute top-17.5 h-60 w-full bg-white -z-1 md:hidden flex flex-col p-4 items-center justify-between font-semibold
           `}>
-          <Link to="/" className={`${currentRoute === "/" ? "border-b-2 border-outline" : ""}`} onClick={() => { setIsMenu(false) }}>Home</Link>
-          <Link to="/service" className={`${currentRoute === "/service" ? "border-b-2 border-outline" : ""}`} onClick={() => { setIsMenu(false) }}> Service</Link>
-          <Link to="/about" className={`${currentRoute === "/about" ? "border-b-2 border-outline" : ""}`} onClick={() => { setIsMenu(false) }}>About</Link>
-          <button className="bg-(--primary) text-(--on-primary) p-2 w-full cursor-pointer">Get Quote</button>
+          <Link to="/" className={`
+            hover:text-(--on-surface-variant)
+            ${currentRoute === "/" ? "border-b-2 border-(--outline) text-(--on-surface-variant)" : ""}`}
+            onClick={() => { setIsMenu(false) }}>
+            Home
+          </Link>
+          <Link to="/service" className={`
+            hover:text-(--on-surface-variant)
+            ${currentRoute === "/service" ? "border-b-2 border-(--outline) text-(--on-surface-variant)" : ""}`}
+            onClick={() => { setIsMenu(false) }}>
+            Service
+          </Link>
+          <Link to="/about" className={`
+            hover:text-(--on-surface-variant)
+            ${currentRoute === "/about" ? "border-b-2 border-(--outline) text-(--on-surface-variant)" : ""}`}
+            onClick={() => { setIsMenu(false) }}>
+            About
+          </Link>
+          <Button className="p-2 w-full" type={"inverse-primary"}>Get Quote</Button>
 
         </motion.div>}
       </AnimatePresence>
