@@ -40,7 +40,7 @@ export default function Navbar() {
         {/* Right part of the navbar */}
         <div className="flex flex-1 justify-end bg-white h-full items-center">
           {/* Hide quotes button and show hamburger menu on smaller screens */}
-          <Button className="md:flex hidden px-6 py-2" type="inverse-primary">Get Quote</Button>
+          <Button className="md:flex hidden px-6 py-2 uppercase tracking-widest" type="inverse-primary">Get Quote</Button>
           <button className="flex md:hidden cursor-pointer" onClick={() => { setIsMenu(prev => !prev) }}>
             <Menu />
           </button>
@@ -76,7 +76,7 @@ export default function Navbar() {
             onClick={() => { setIsMenu(false) }}>
             About
           </Link>
-          <Button className="p-2 w-full" type={"inverse-primary"}>Get Quote</Button>
+          <Button className="p-2 w-full uppercase tracking-widest" type={"inverse-primary"}>Get Quote</Button>
 
         </motion.div>}
       </AnimatePresence>

@@ -9,8 +9,8 @@ export default function Button({ className, type, onClick, children }) {
 
   return (
     <button className={`
-      cursor-pointer font-semibold  
-      ${type === "primary" ? "bg-(--primary) text-(--on-primary)" : type === "inverse-primary" ? "  bg-(--inverse-primary) text-(--on-primary-container)" : ""} 
+      cursor-pointer font-semibold transition-all duration-150
+      ${type === "primary" ? "bg-(--primary) text-(--on-primary)" : type === "inverse-primary" ? "  bg-(--inverse-primary) text-(--on-primary-container) hover:bg-[#a68926] hover:text-(--on-primary)" : ""} 
       ${className}`}
       onClick={onclick}>
       {children}
