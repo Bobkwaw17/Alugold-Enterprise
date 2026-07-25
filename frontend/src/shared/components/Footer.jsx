@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function Footer() {
 
   return (
-    <footer className="flex w-full min-h-10 bg-(--inverse-surface) text-(--on-tertiary) flex-col">
+    <footer className="flex w-screen min-h-10 bg-(--inverse-surface) text-(--on-tertiary) flex-col">
       <div className="max-w-7xl w-full px-6 py-12 mx-auto grid grid-cols-1 lg:grid-cols-[1fr_15%_15%_25%] md:grid-cols-[1fr_20%_20%] gap-4">
 
         <div className="flex flex-col gap-6 ">
