@@ -224,7 +224,7 @@ export default function BookingSection() {
                   </label>
                   <textarea
                     name="description"
-                    className="min-h-40  w-full resize-none border border-[#d0c5af]/50 p-4 outline-none transition-all focus:border-[#735c00]"
+                    className="min-h-40 w-full resize-none border border-[#d0c5af]/50 p-4 outline-none transition-all focus:border-[#735c00]"
                     placeholder="Briefly describe your architectural requirements..."
                     rows={4}
                   />

@@ -9,7 +9,7 @@ export default function AppLayout() {
   return (
     <div>
       <Navbar />
-      <main className="flex flex-col max-w-7xl mx-auto mt-17.5 ">
+      <main className="flex flex-col max-w-7xl mx-auto mt-17.5">
         <Load><Outlet /></Load>
       </main>
       <Footer />
