@@ -114,9 +114,9 @@ function SidebarPanel() {
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const SERVICES = [
-  { id: "cladding",      label: "Cladding",       icon: <Layers size={20} /> },
-  { id: "fabrication",   label: "Fabrication",     icon: <Settings2 size={20} /> },
-  { id: "curtain-walls", label: "Curtain Walls",   icon: <Grid2x2 size={20} /> },
+  { id: "cladding", label: "Cladding", icon: <Layers size={20} /> },
+  { id: "fabrication", label: "Fabrication", icon: <Settings2 size={20} /> },
+  { id: "curtain-walls", label: "Curtain Walls", icon: <Grid2x2 size={20} /> },
 ];
 
 const TIME_SLOTS = [
@@ -128,9 +128,9 @@ const TIME_SLOTS = [
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 export default function BookingSection() {
-  const [service,   setService]   = useState("cladding");
-  const [date,      setDate]      = useState(null);
-  const [timeSlot,  setTimeSlot]  = useState(TIME_SLOTS[0]);
+  const [service, setService] = useState("cladding");
+  const [date, setDate] = useState(null);
+  const [timeSlot, setTimeSlot] = useState(TIME_SLOTS[0]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -139,8 +139,8 @@ export default function BookingSection() {
       service,
       date: date?.toISOString().slice(0, 10) ?? null,
       timeSlot,
-      name:        formData.get("name"),
-      email:       formData.get("email"),
+      name: formData.get("name"),
+      email: formData.get("email"),
       description: formData.get("description"),
     };
     console.log("Booking payload:", payload);
@@ -148,7 +148,7 @@ export default function BookingSection() {
   }
 
   return (
-    <section className="mx-auto max-w-7xl px-5 pb-20 lg:px-16">
+    <section className="mx-auto max-w-6xl px-5 pb-20 lg:px-16">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
 
         {/* ── Form panel ──────────────────────────────────────────────────── */}
@@ -215,8 +215,8 @@ export default function BookingSection() {
               </span>
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
                 <div className="space-y-6">
-                  <FloatingInput label="Full Name"      placeholder="John Doe"              type="text" />
-                  <FloatingInput label="Email Address"  placeholder="corporate@entity.com"  type="email" />
+                  <FloatingInput label="Full Name" placeholder="John Doe" type="text" />
+                  <FloatingInput label="Email Address" placeholder="corporate@entity.com" type="email" />
                 </div>
                 <div className="relative">
                   <label className="absolute -top-2 left-3 bg-white px-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#5f5e5e]">
@@ -224,7 +224,7 @@ export default function BookingSection() {
                   </label>
                   <textarea
                     name="description"
-                    className="min-h-[160px] w-full resize-none border border-[#d0c5af]/50 p-4 outline-none transition-all focus:border-[#735c00]"
+                    className="min-h-40 w-full resize-none border border-[#d0c5af]/50 p-4 outline-none transition-all focus:border-[#735c00]"
                     placeholder="Briefly describe your architectural requirements..."
                     rows={4}
                   />
