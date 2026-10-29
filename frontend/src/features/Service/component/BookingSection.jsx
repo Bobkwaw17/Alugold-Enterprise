@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { api, unwrap } from "../../../lib/api";
+import { useSubmit } from "../../../lib/useSubmit";
+import { FormMessage } from "../../../shared/components/Field";
 import { Layers, Settings2, Grid2x2, Phone, Mail } from "lucide-react";
 import BookingCalendar from "./calendar";
 
@@ -30,26 +33,27 @@ function ServicePill({ icon, label, checked, onChange }) {
   );
 }
 
-function TimeSlot({ slot, checked, onChange }) {
+function TimeSlot({ slot, checked, onChange, available = true }) {
   return (
-    <label className="block cursor-pointer">
+    <label className={`block ${available ? "cursor-pointer" : "cursor-not-allowed opacity-50"}`}>
       <input
         className="peer sr-only"
         name="time"
         type="radio"
         checked={checked}
+        disabled={!available}
         onChange={onChange}
         readOnly={!onChange}
       />
       <div className="flex items-center justify-between border border-[#d0c5af]/30 px-6 py-4 transition-all peer-checked:bg-[#0f0f0f] peer-checked:text-white">
         <span className="text-sm font-semibold">{slot}</span>
-        <span className="text-xs uppercase tracking-[0.2em] opacity-50">Available</span>
+        <span className="text-xs uppercase tracking-[0.2em] opacity-50">{available ? "Available" : "Booked"}</span>
       </div>
     </label>
   );
 }
 
-function FloatingInput({ label, type = "text", placeholder }) {
+function FloatingInput({ label, name, type = "text", placeholder }) {
   return (
     <div className="relative">
       <label className="absolute -top-2 left-3 bg-white px-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#5f5e5e]">
@@ -57,6 +61,8 @@ function FloatingInput({ label, type = "text", placeholder }) {
       </label>
       <input
         className="w-full border border-[#d0c5af]/50 p-4 outline-none transition-all focus:border-[#735c00]"
+        name={name}
+        required
         placeholder={placeholder}
         type={type}
       />
@@ -132,19 +138,49 @@ export default function BookingSection() {
   const [date,      setDate]      = useState(null);
   const [timeSlot,  setTimeSlot]  = useState(TIME_SLOTS[0]);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const payload = {
-      service,
-      date: date?.toISOString().slice(0, 10) ?? null,
+  const [availability, setAvailability] = useState({}) // slot -> boolean
+
+  // Local YYYY-MM-DD (toISOString would shift the day for users ahead of UTC)
+  const dateStr = date
+    ? `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
+    : null
+
+  const { busy, state, run, setState } = useSubmit(
+    (body) => api.post("/bookings", body),
+    "Booking confirmed — we'll email you the details."
+  )
+
+  useEffect(() => {
+    if (!dateStr) { setAvailability({}); return }
+    let cancelled = false
+    api.get("/bookings/slots", { params: { date: dateStr } })
+      .then((r) => {
+        if (cancelled) return
+        const map = Object.fromEntries(unwrap(r).slots.map((s) => [s.slot, s.available]))
+        setAvailability(map)
+        setTimeSlot((cur) => (map[cur] === false ? TIME_SLOTS.find((s) => map[s] !== false) ?? cur : cur))
+      })
+      .catch(() => !cancelled && setAvailability({}))
+    return () => { cancelled = true }
+  }, [dateStr])
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    const form = e.currentTarget
+    if (!dateStr) return setState({ type: "error", text: "Please choose a preferred date." })
+    const formData = new FormData(form)
+    const { ok } = await run({
+      service: SERVICES.find((s) => s.id === service).label,
+      date: dateStr,
       timeSlot,
-      name:        formData.get("name"),
-      email:       formData.get("email"),
-      description: formData.get("description"),
-    };
-    console.log("Booking payload:", payload);
-    // TODO: POST to /api/bookings
+      fullName: formData.get("fullName")?.toString().trim(),
+      email: formData.get("email")?.toString().trim(),
+      projectDescription: formData.get("projectDescription")?.toString().trim(),
+    })
+    if (ok) {
+      form.reset()
+      setDate(null)
+    }
   }
 
   return (
@@ -201,6 +237,7 @@ export default function BookingSection() {
                       key={slot}
                       slot={slot}
                       checked={timeSlot === slot}
+                      available={availability[slot] !== false}
                       onChange={() => setTimeSlot(slot)}
                     />
                   ))}
@@ -215,15 +252,15 @@ export default function BookingSection() {
               </span>
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
                 <div className="space-y-6">
-                  <FloatingInput label="Full Name"      placeholder="John Doe"              type="text" />
-                  <FloatingInput label="Email Address"  placeholder="corporate@entity.com"  type="email" />
+                  <FloatingInput label="Full Name" name="fullName"      placeholder="John Doe"              type="text" />
+                  <FloatingInput label="Email Address" name="email"  placeholder="corporate@entity.com"  type="email" />
                 </div>
                 <div className="relative">
                   <label className="absolute -top-2 left-3 bg-white px-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#5f5e5e]">
                     Project Description
                   </label>
                   <textarea
-                    name="description"
+                    name="projectDescription"
                     className="min-h-[160px] w-full resize-none border border-[#d0c5af]/50 p-4 outline-none transition-all focus:border-[#735c00]"
                     placeholder="Briefly describe your architectural requirements..."
                     rows={4}
@@ -233,12 +270,14 @@ export default function BookingSection() {
             </div>
 
             {/* Submit */}
-            <div className="flex justify-end border-t border-[#d0c5af]/30 pt-6">
+            <div className="flex flex-col items-end gap-3 border-t border-[#d0c5af]/30 pt-6">
+              <FormMessage state={state} />
               <button
                 type="submit"
-                className="bg-[#d4af37] px-12 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition-all hover:bg-[#a68926]"
+                disabled={busy}
+                className="cursor-pointer bg-[#d4af37] px-12 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-white transition-all hover:bg-[#a68926] disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Confirm Booking
+                {busy ? "Booking…" : "Confirm Booking"}
               </button>
             </div>
           </form>

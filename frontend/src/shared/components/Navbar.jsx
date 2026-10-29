@@ -4,13 +4,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import BackDrop from "./BackDrop";
 import { useState } from "react";
 import Button from "./Button";
+import { useUI } from "../../store/ui";
 
 export default function Navbar() {
 
   const [isMenu, setIsMenu] = useState(false)
   const currentRoute = useLocation().pathname;
-
-  console.log(currentRoute)
+  const openModal = useUI((s) => s.open)
 
   return (
     <nav className="w-screen h-17.5 bg-white gap-3 fixed top-0 left-0 z-99 md:border-b border-(--outline-variant)/30">
@@ -40,7 +40,7 @@ export default function Navbar() {
         {/* Right part of the navbar */}
         <div className="flex flex-1 justify-end bg-white h-full items-center">
           {/* Hide quotes button and show hamburger menu on smaller screens */}
-          <Button className="md:flex hidden px-6 py-2 uppercase tracking-widest" type="inverse-primary">Get Quote</Button>
+          <Button className="md:flex hidden px-6 py-2 uppercase tracking-widest" type="inverse-primary" onClick={() => openModal("quote")}>Get Quote</Button>
           <button className="flex md:hidden cursor-pointer" onClick={() => { setIsMenu(prev => !prev) }}>
             <Menu />
           </button>
@@ -76,7 +76,7 @@ export default function Navbar() {
             onClick={() => { setIsMenu(false) }}>
             About
           </Link>
-          <Button className="p-2 w-full uppercase tracking-widest" type={"inverse-primary"}>Get Quote</Button>
+          <Button className="p-2 w-full uppercase tracking-widest" type={"inverse-primary"} onClick={() => { setIsMenu(false); openModal("quote") }}>Get Quote</Button>
 
         </motion.div>}
       </AnimatePresence>

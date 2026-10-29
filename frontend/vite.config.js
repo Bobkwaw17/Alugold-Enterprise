@@ -7,4 +7,8 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    // Dev: forward /api to the Express backend (set VITE_API_URL to bypass in production)
+    proxy: { '/api': 'http://localhost:4000' },
+  },
 })

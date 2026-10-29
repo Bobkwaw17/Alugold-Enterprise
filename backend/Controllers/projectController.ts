@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import Project from "../Models/Project";
+import { requireFields } from "../Utils/validate";
 
 export const getAllProjects: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -25,8 +26,9 @@ export const getProjectById: RequestHandler = async (req: Request, res: Response
 
 export const createProject: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { name, serviceType, description } = req.body;
-    const project = await Project.create({ name, serviceType, description });
+    requireFields(req.body, ["name", "serviceType", "description"]);
+    const { name, serviceType, description, status, progress, phase, nextMilestone } = req.body;
+    const project = await Project.create({ name, serviceType, description, status, progress, phase, nextMilestone, owner: req.user?._id });
     res.status(201).json({ status: "success", data: project });
   } catch (error) {
     next(error);

@@ -1,11 +1,12 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import Newsletter from "../Models/Newsletter";
+import { isEmail } from "../Utils/validate";
 
 export const subscribe: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { email } = req.body;
-    if (!email) {
-      res.status(400).json({ status: "error", data: { message: "Email is required" } });
+    if (!isEmail(email)) {
+      res.status(400).json({ status: "error", data: { message: "A valid email is required" } });
       return;
     }
     const existing = await Newsletter.findOne({ email });
@@ -23,8 +24,8 @@ export const subscribe: RequestHandler = async (req: Request, res: Response, nex
 export const unsubscribe: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { email } = req.body;
-    if (!email) {
-      res.status(400).json({ status: "error", data: { message: "Email is required" } });
+    if (!isEmail(email)) {
+      res.status(400).json({ status: "error", data: { message: "A valid email is required" } });
       return;
     }
     const subscriber = await Newsletter.findOneAndDelete({ email });

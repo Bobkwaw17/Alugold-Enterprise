@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components//Navbar"
 import Footer from "./Footer";
 import Load from "./Load";
+import Modals from "../modals/Modals";
 
 // App Layout handles layout groupings for pages with shared compoennts
 export default function AppLayout() {
@@ -13,6 +14,7 @@ export default function AppLayout() {
         <Load><Outlet /></Load>
       </main>
       <Footer />
+      <Modals />
     </div>
   )
 }

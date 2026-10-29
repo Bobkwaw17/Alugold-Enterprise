@@ -1,10 +1,36 @@
-# ALUGOLD ENTERPRISE — API Endpoints
+# ALUGOLD ENTERPRISE
+
+## Setup
+
+```bash
+# backend (Express + TypeScript + MongoDB)
+cd backend && cp .env.example .env     # fill MONGODB_URL, JWT_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD
+npm install
+npm run seed      # creates the admin user + services
+npm run dev       # http://localhost:4000
+npm test          # smoke tests (full flow runs when MONGODB_URL is set)
+
+# frontend (React + Vite + Tailwind v4)
+cd frontend && npm install && npm run dev   # http://localhost:5173, /api is proxied to :4000
+```
+
+Auth is a Bearer JWT (`Authorization: Bearer <token>`), 7-day expiry. Logout is client-side (token discarded).
+Admin-only: all `/api/projects`, and `GET/PATCH/DELETE /api/bookings`. Preferences: the user themself or an admin.
+Responses are `{ status: "success", data }` or `{ status: "error", data: { message } }`.
+A booked slot returns `409`; `GET /api/bookings/slots?date=` lists availability.
+
+## API Endpoints
 
 ## Services
 | Method | Endpoint |
 |--------|----------|
-| `GET` | `/api/services` |
-| `GET` | `/api/services/:id` |
+| `GET` | `/api/services` (sorted by `order`) |
+| `GET` | `/api/services/:id` (Mongo id or slug) |
+| `POST` | `/api/services` (admin) |
+| `PATCH` | `/api/services/:id` (admin) |
+| `DELETE` | `/api/services/:id` (admin) |
+
+**POST body:** `{ name, description, category?, slug?, imageUrl?, imageAlt?, featured?, order? }` — slug defaults to the slugified name. `order` sets card position on the Service page (first card renders large).
 
 ## Bookings
 | Method | Endpoint |
@@ -38,6 +64,7 @@
 |--------|----------|
 | `POST` | `/api/auth/login` |
 | `POST` | `/api/auth/logout` |
+| `GET` | `/api/auth/me` |
 
 **POST /login body:** `{ email, password }`
 
@@ -49,13 +76,15 @@
 | `POST` | `/api/projects` |
 | `PATCH` | `/api/projects/:id` |
 
-**POST body:** `{ name, serviceType, description }`
+**POST body:** `{ name, serviceType, description, status?, progress?, phase?, nextMilestone? }`
 
 ## User Preferences
 | Method | Endpoint |
 |--------|----------|
 | `GET` | `/api/users/:id/preferences` |
 | `PUT` | `/api/users/:id/preferences` |
+
+**PUT body:** `{ materials?: string[], finishes?: string[], notifications?: { milestones?, email? } }`
 
 ## Contact
 | Method | Endpoint |
