@@ -1,13 +1,15 @@
 import { Ruler, BadgeCheck, Leaf } from "lucide-react"
 import Media from "../../../shared/components/Media"
 import { images } from "../../../shared/images"
+import { useText } from "../../../store/content"
 
 export default function Details() {
+  const t = useText()
   return (
     <section className="mx-auto max-w-7xl px-5 py-20 lg:px-16">
       <div className="mb-12 text-center">
-        <h2 className="mb-2 text-2xl font-bold">Excellence in Every Detail</h2>
-        <p className="text-sm text-[#5f5e5e]">The ALUGOLD standard of architectural integrity.</p>
+        <h2 className="mb-2 text-2xl font-bold">{t("about_detailsTitle")}</h2>
+        <p className="text-sm text-[#5f5e5e]">{t("about_detailsSubtitle")}</p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-12">

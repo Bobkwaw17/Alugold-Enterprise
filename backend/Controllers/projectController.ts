@@ -50,3 +50,16 @@ export const updateProject: RequestHandler = async (req: Request, res: Response,
     next(error);
   }
 };
+
+export const deleteProject: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const project = await Project.findByIdAndDelete(req.params.id);
+    if (!project) {
+      res.status(404).json({ status: "error", data: { message: "Project not found" } });
+      return;
+    }
+    res.json({ status: "success", data: { message: "Project deleted" } });
+  } catch (error) {
+    next(error);
+  }
+};

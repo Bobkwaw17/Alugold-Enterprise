@@ -4,9 +4,11 @@ import { useState } from "react";
 import { api } from "../../lib/api";
 import { useSubmit } from "../../lib/useSubmit";
 import { useUI } from "../../store/ui";
+import { useText } from "../../store/content";
 
 
 export default function Footer() {
+  const t = useText()
   const openModal = useUI((s) => s.open)
   const [email, setEmail] = useState("")
   const { busy, state, run } = useSubmit(
@@ -26,7 +28,7 @@ export default function Footer() {
         <div className="flex flex-col gap-6 ">
           <h3 className="text-2xl font-semibold text-white">ALUGOLD</h3>
           <p className="lg:max-w-150 text-(--inverse-on-surface) opacity-70">
-            Redefining the skyline with precission engineering and architectural solutions for high-net-worth developers
+            {t("site_tagline")}
           </p>
           <div className="flex w-full gap-2 h-10">
             <button className="h-full aspect-square rounded-xl items-center flex justify-center border border-(--outline)/30 cursor-pointer hover:bg-white/10 transition-all duration-150">

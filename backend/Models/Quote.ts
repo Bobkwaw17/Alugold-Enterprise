@@ -6,6 +6,7 @@ export interface IQuote extends Document {
   phone?: string;
   serviceType: string;
   projectDescription: string;
+  status: "new" | "contacted" | "closed";
 }
 
 const QuoteSchema = new Schema<IQuote>(
@@ -15,6 +16,7 @@ const QuoteSchema = new Schema<IQuote>(
     phone: { type: String, trim: true },
     serviceType: { type: String, required: true, trim: true },
     projectDescription: { type: String, required: true, trim: true },
+    status: { type: String, enum: ["new", "contacted", "closed"], default: "new" },
   },
   { timestamps: true }
 );

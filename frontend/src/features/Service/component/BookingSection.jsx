@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api, unwrap } from "../../../lib/api";
 import { useSubmit } from "../../../lib/useSubmit";
 import { FormMessage } from "../../../shared/components/Field";
+import { useText } from "../../../store/content";
 import { Layers, Settings2, Grid2x2, Phone, Mail } from "lucide-react";
 import BookingCalendar from "./calendar";
 
@@ -71,6 +72,7 @@ function FloatingInput({ label, name, type = "text", placeholder }) {
 }
 
 function SidebarPanel() {
+  const t = useText();
   return (
     <div className="space-y-6 lg:col-span-4">
       {/* Contact card */}
@@ -81,14 +83,14 @@ function SidebarPanel() {
             <Phone size={20} className="mt-0.5 shrink-0 text-[#d4af37]" />
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-[#d0c5af]">Hotline</div>
-              <div className="text-lg">+44 (0) 20 7946 0123</div>
+              <div className="text-lg">{t("contact_hotline")}</div>
             </div>
           </div>
           <div className="flex gap-4">
             <Mail size={20} className="mt-0.5 shrink-0 text-[#d4af37]" />
             <div>
               <div className="text-xs uppercase tracking-[0.2em] text-[#d0c5af]">Email</div>
-              <div className="text-lg">consult@alugold.com</div>
+              <div className="text-lg">{t("contact_email")}</div>
             </div>
           </div>
         </div>

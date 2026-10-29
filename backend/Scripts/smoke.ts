@@ -40,6 +40,9 @@ async function main() {
   check("login missing -> 400", (await call("POST", "/api/auth/login", {})).status === 400);
   check("create service w/o token -> 401", (await call("POST", "/api/services", { name: "x", description: "y" })).status === 401);
   check("delete service w/o token -> 401", (await call("DELETE", "/api/services/abc")).status === 401);
+  for (const [m, path] of [["GET", "/api/quotes"], ["GET", "/api/contact"], ["GET", "/api/newsletter"], ["GET", "/api/admin/stats"], ["PUT", "/api/content"], ["DELETE", "/api/projects/x"]])
+    check(`${m} ${path} w/o token -> 401`, (await call(m, path, m === "PUT" ? { site_tagline: "x" } : undefined)).status === 401);
+  check("GET /api/content is public shape", ["object"].includes(typeof (await call("GET", "/")).json));
   check("GET bookings w/o token -> 401", (await call("GET", "/api/bookings")).status === 401);
   check("projects w/o token -> 401", (await call("GET", "/api/projects")).status === 401);
   check("preferences w/o token -> 401", (await call("GET", "/api/users/abc/preferences")).status === 401);
@@ -71,6 +74,14 @@ async function main() {
     check("get service by slug", (await call("GET", "/api/services/smoke-service")).json.data?.name === "Smoke Service");
     check("list services sorted by order", (await call("GET", "/api/services")).json.data.at(-1)?.slug === "smoke-service");
     check("delete service", (await call("DELETE", `/api/services/${sv.json.data?._id}`, undefined, token)).status === 200);
+    const cu = await call("PUT", "/api/content", { home_heroTitle: "Smoke Title" }, token);
+    check("update content", cu.status === 200 && cu.json.data.home_heroTitle === "Smoke Title", JSON.stringify(cu.json));
+    check("unknown content key -> 400", (await call("PUT", "/api/content", { evil: "x" }, token)).status === 400);
+    check("empty value reverts", (await call("PUT", "/api/content", { home_heroTitle: "" }, token)).json.data.home_heroTitle === undefined);
+    const st = await call("GET", "/api/admin/stats", undefined, token);
+    check("admin stats", st.status === 200 && typeof st.json.data.newQuotes === "number", JSON.stringify(st.json));
+    const ql = await call("GET", "/api/quotes", undefined, token);
+    check("admin list quotes", ql.status === 200 && Array.isArray(ql.json.data));
     check("create quote -> 201", (await call("POST", "/api/quotes", { fullName: "Q", email: "q@t.co", serviceType: "cladding", projectDescription: "x" })).status === 201);
     const pr = await call("PUT", `/api/users/${uid}/preferences`, { materials: ["Aluminum"], notifications: { email: false } }, token);
     check("update preferences", pr.status === 200 && pr.json.data.notifications.email === false, JSON.stringify(pr.json));

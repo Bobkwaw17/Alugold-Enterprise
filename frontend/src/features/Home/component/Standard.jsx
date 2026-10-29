@@ -1,12 +1,13 @@
 import Media from "../../../shared/components/Media"
 import { images } from "../../../shared/images"
-
-const stats = [
-  { value: "15+", label: "Years Excellence" },
-  { value: "500+", label: "Projects Completed" },
-]
+import { useText } from "../../../store/content"
 
 export default function Standard() {
+  const t = useText()
+  const stats = [
+    { value: t("home_stat1Value"), label: t("home_stat1Label") },
+    { value: t("home_stat2Value"), label: t("home_stat2Label") },
+  ]
   return (
     <section className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 md:grid-cols-2 lg:px-16">
       <div className="relative">
@@ -18,18 +19,11 @@ export default function Standard() {
 
       <div>
         <span className="mb-3 block text-[10px] font-bold uppercase tracking-[0.24em] text-[#735c00]">
-          The Alugold Standard
+          {t("home_standardEyebrow")}
         </span>
-        <h2 className="mb-6 font-serif text-3xl font-bold md:text-4xl">Decades of Engineering Mastery</h2>
-        <p className="mb-4 text-sm leading-6 text-[#5f5e5e]">
-          ALUGOLD ENTERPRISE stands at the intersection of architectural vision and structural
-          reality. We specialize in high-end aluminum and glass solutions that define the modern skyline.
-        </p>
-        <p className="mb-8 text-sm leading-6 text-[#5f5e5e]">
-          Our approach combines rigorous engineering standards with an aesthetic eye, ensuring that
-          every project—from simple window fabrications to complex curtain wall systems—meets the
-          highest global benchmarks for quality and durability.
-        </p>
+        <h2 className="mb-6 font-serif text-3xl font-bold md:text-4xl">{t("home_standardTitle")}</h2>
+        <p className="mb-4 text-sm leading-6 text-[#5f5e5e]">{t("home_standardBody1")}</p>
+        <p className="mb-8 text-sm leading-6 text-[#5f5e5e]">{t("home_standardBody2")}</p>
         <div className="flex gap-12">
           {stats.map((s) => (
             <div key={s.label}>

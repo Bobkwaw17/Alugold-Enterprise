@@ -10,6 +10,8 @@ import newsletterRoutes from "./Routes/newsletterRoutes";
 import projectRoutes from "./Routes/projectRoutes";
 import contactRoutes from "./Routes/contactRoutes";
 import serviceRoutes from "./Routes/serviceRoutes";
+import contentRoutes from "./Routes/contentRoutes";
+import adminRoutes from "./Routes/adminRoutes";
 
 const app = express();
 
@@ -31,6 +33,8 @@ app.use("/api/newsletter", newsletterRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/content", contentRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.use((_req, res) => {
   res.status(404).json({ status: "error", data: { message: "404 - not found" } });

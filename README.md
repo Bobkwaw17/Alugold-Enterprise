@@ -19,6 +19,21 @@ Admin-only: all `/api/projects`, and `GET/PATCH/DELETE /api/bookings`. Preferenc
 Responses are `{ status: "success", data }` or `{ status: "error", data: { message } }`.
 A booked slot returns `409`; `GET /api/bookings/slots?date=` lists availability.
 
+## Deploying the frontend (Vercel)
+
+`frontend/vercel.json` rewrites every path to `index.html` so deep links like `/about` and `/admin/quotes` work on refresh.
+Set the project root to `frontend` and add the env var `VITE_API_URL` (e.g. `https://your-api.example.com/api`);
+on the backend set `CLIENT_ORIGIN` to the Vercel URL so CORS allows it.
+
+## Admin panel
+
+Open `/admin` and sign in with the seeded admin (`ADMIN_EMAIL` / `ADMIN_PASSWORD`). Sections:
+Overview (counts + upcoming bookings), Bookings, Quote Requests, Messages, Subscribers, Projects, Services (create/edit/delete),
+and **Page Content** (edit Home / About / Services page text, hotline, email and footer tagline; empty = default).
+
+Editable texts live in `frontend/src/lib/contentDefaults.js` (defaults + admin form) and the whitelist in
+`backend/Utils/contentKeys.ts` — to make new text editable, add the key to both and read it with `useText()`.
+
 ## API Endpoints
 
 ## Services
@@ -92,3 +107,14 @@ A booked slot returns `409`; `GET /api/bookings/slots?date=` lists availability.
 | `POST` | `/api/contact` |
 
 **POST body:** `{ fullName, email, message }`
+
+## Admin & content (admin-only unless noted)
+| Method | Endpoint |
+|--------|----------|
+| `GET` | `/api/admin/stats` |
+| `GET` | `/api/content` (public) |
+| `PUT` | `/api/content` — body `{ key: "text" }`, empty string reverts to default |
+| `GET/PATCH/DELETE` | `/api/quotes[/:id]` — PATCH `{ status: new\|contacted\|closed }` |
+| `GET/PATCH/DELETE` | `/api/contact[/:id]` — PATCH `{ status: unread\|read\|archived }` |
+| `GET/DELETE` | `/api/newsletter[/:id]` |
+| `DELETE` | `/api/projects/:id` |

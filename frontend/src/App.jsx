@@ -8,9 +8,12 @@ const Home = lazy(() => import("./features/Home/Home"));
 const NotFound = lazy(() => import("./NotFound"));
 const Service = lazy(() => import("./features/Service/Service"));
 const About = lazy(() => import("./features/About/About"));
+const Admin = lazy(() => import("./features/Admin/Admin"));
 
 
 const router = createBrowserRouter([
+  // Admin has its own layout (no public navbar/footer)
+  { path: "/admin/*", element: <Load><Admin /></Load> },
   {
     path: "/",
     element: <AppLayout />,

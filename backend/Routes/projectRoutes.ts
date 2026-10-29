@@ -4,6 +4,7 @@ import {
   getProjectById,
   createProject,
   updateProject,
+  deleteProject,
 } from "../Controllers/projectController";
 import { requireAuth, requireAdmin } from "../Middleware/auth";
 
@@ -16,5 +17,6 @@ router.get("/", getAllProjects);
 router.get("/:id", getProjectById);
 router.post("/", createProject);
 router.patch("/:id", updateProject);
+router.delete("/:id", deleteProject);
 
 export default router;

@@ -1,5 +1,6 @@
 import Media from "../../../shared/components/Media"
 import { images } from "../../../shared/images"
+import { useText } from "../../../store/content"
 
 const expertise = [
   { category: "Structural", title: "Exterior Cladding Systems", image: images.facade, tone: "dark",
@@ -17,6 +18,7 @@ const expertise = [
 ]
 
 export default function CoreExpertise() {
+  const t = useText()
   return (
     <section className="bg-white py-20">
       <div className="mx-auto max-w-7xl px-5 lg:px-16">
@@ -24,7 +26,7 @@ export default function CoreExpertise() {
           <span className="mb-2 block text-[10px] font-bold uppercase tracking-[0.24em] text-[#735c00]">
             Precision Solutions
           </span>
-          <h2 className="font-serif text-3xl font-bold md:text-4xl">Our Core Expertise</h2>
+          <h2 className="font-serif text-3xl font-bold md:text-4xl">{t("home_expertiseTitle")}</h2>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {expertise.map((e) => (
