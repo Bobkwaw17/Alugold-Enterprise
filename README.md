@@ -19,11 +19,20 @@ Admin-only: all `/api/projects`, and `GET/PATCH/DELETE /api/bookings`. Preferenc
 Responses are `{ status: "success", data }` or `{ status: "error", data: { message } }`.
 A booked slot returns `409`; `GET /api/bookings/slots?date=` lists availability.
 
-## Deploying the frontend (Vercel)
+## Deploying as one Vercel service
 
-`frontend/vercel.json` rewrites every path to `index.html` so deep links like `/about` and `/admin/quotes` work on refresh.
-Set the project root to `frontend` and add the env var `VITE_API_URL` (e.g. `https://your-api.example.com/api`);
-on the backend set `CLIENT_ORIGIN` to the Vercel URL so CORS allows it.
+Import this repository with the project root set to the repository root. The root `vercel.json` builds the Vite app and
+serves Express through `/api/*` on the same domain.
+
+Add these Vercel environment variables:
+- `MONGODB_URL`
+- `JWT_SECRET`
+- `ADMIN_NAME` (optional)
+- `ADMIN_EMAIL`
+- `ADMIN_PASSWORD`
+
+Leave `VITE_API_URL` empty so the frontend calls `/api`. `CLIENT_ORIGIN` is optional for this same-domain setup; if it is
+set, use the deployed Vercel URL (or a comma-separated list of allowed origins).
 
 ## Admin panel
 
