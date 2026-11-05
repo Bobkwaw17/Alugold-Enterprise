@@ -4,11 +4,11 @@
 
 ```bash
 # backend (Express + TypeScript + MongoDB)
-cd backend && cp .env.example .env     # fill MONGODB_URL, JWT_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD
+cd backend && cp .env.example .env     # fill MONGODB_URI, JWT_SECRET, ADMIN_EMAIL, ADMIN_PASSWORD
 npm install
 npm run seed      # creates the admin user + services
 npm run dev       # http://localhost:4000
-npm test          # smoke tests (full flow runs when MONGODB_URL is set)
+npm test          # smoke tests (full flow runs when MONGODB_URI is set)
 
 # frontend (React + Vite + Tailwind v4)
 cd frontend && npm install && npm run dev   # http://localhost:5173, /api is proxied to :4000
@@ -25,7 +25,7 @@ Import this repository with the project root set to the repository root. The roo
 serves Express through `/api/*` on the same domain.
 
 Add these Vercel environment variables:
-- `MONGODB_URL`
+- `MONGODB_URI`
 - `JWT_SECRET`
 - `ADMIN_NAME` (optional)
 - `ADMIN_EMAIL`

@@ -5,7 +5,7 @@ import User from "../Models/User";
 import Service from "../Models/Service";
 
 async function main() {
-  await mongoose.connect(process.env.MONGODB_URL as string);
+  await mongoose.connect(process.env.MONGODB_URI as string);
 
   const email = (process.env.ADMIN_EMAIL ?? "").toLowerCase();
   const password = process.env.ADMIN_PASSWORD;

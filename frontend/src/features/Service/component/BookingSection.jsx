@@ -19,7 +19,7 @@ function ServicePill({ icon, label, checked, onChange }) {
         onChange={onChange}
         readOnly={!onChange}
       />
-      <div className="border border-[#d0c5af]/50 p-6 transition-all peer-checked:border-[#d4af37] peer-checked:bg-[#f3f3f4]">
+      <div className="border border-[#d0c5af]/50 p-6 transition-all peer-checked:border-[#d4af37] peer-checked:bg-[#f3f3f4] peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#d4af37]">
         <div className="mb-2 text-[#5f5e5e] transition-colors group-hover:text-[#735c00]">
           {icon}
         </div>
@@ -34,9 +34,10 @@ function ServicePill({ icon, label, checked, onChange }) {
   );
 }
 
-function TimeSlot({ slot, checked, onChange, available = true }) {
+function TimeSlot({ slot, checked, onChange, status }) {
+  const available = status === "Available"
   return (
-    <label className={`block ${available ? "cursor-pointer" : "cursor-not-allowed opacity-50"}`}>
+    <label className={`block ${available ? "cursor-pointer" : "cursor-not-allowed opacity-60"}`}>
       <input
         className="peer sr-only"
         name="time"
@@ -44,11 +45,10 @@ function TimeSlot({ slot, checked, onChange, available = true }) {
         checked={checked}
         disabled={!available}
         onChange={onChange}
-        readOnly={!onChange}
       />
-      <div className="flex items-center justify-between border border-[#d0c5af]/30 px-6 py-4 transition-all peer-checked:bg-[#0f0f0f] peer-checked:text-white">
+      <div className="flex min-h-14 items-center justify-between gap-3 border border-[#d0c5af]/30 px-4 py-4 transition-all peer-checked:bg-[#0f0f0f] peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#d4af37] sm:px-6">
         <span className="text-sm font-semibold">{slot}</span>
-        <span className="text-xs uppercase tracking-[0.2em] opacity-50">{available ? "Available" : "Booked"}</span>
+        <span className="shrink-0 text-[10px] uppercase tracking-[0.12em] opacity-60 sm:tracking-[0.2em]">{status}</span>
       </div>
     </label>
   );
@@ -140,7 +140,8 @@ export default function BookingSection() {
   const [date,      setDate]      = useState(null);
   const [timeSlot,  setTimeSlot]  = useState(TIME_SLOTS[0]);
 
-  const [availability, setAvailability] = useState({}) // slot -> boolean
+  const [availability, setAvailability] = useState(null)
+  const [availabilityError, setAvailabilityError] = useState("")
 
   // Local YYYY-MM-DD (toISOString would shift the day for users ahead of UTC)
   const dateStr = date
@@ -153,23 +154,39 @@ export default function BookingSection() {
   )
 
   useEffect(() => {
-    if (!dateStr) { setAvailability({}); return }
+    if (!dateStr) {
+      setAvailability(null)
+      setAvailabilityError("")
+      return
+    }
     let cancelled = false
+    setAvailability(null)
+    setAvailabilityError("")
+    setState(null)
     api.get("/bookings/slots", { params: { date: dateStr } })
       .then((r) => {
         if (cancelled) return
         const map = Object.fromEntries(unwrap(r).slots.map((s) => [s.slot, s.available]))
         setAvailability(map)
-        setTimeSlot((cur) => (map[cur] === false ? TIME_SLOTS.find((s) => map[s] !== false) ?? cur : cur))
+        setTimeSlot((cur) => map[cur] === true ? cur : TIME_SLOTS.find((s) => map[s] === true) ?? "")
       })
-      .catch(() => !cancelled && setAvailability({}))
+      .catch(() => {
+        if (cancelled) return
+        setAvailability({})
+        setAvailabilityError("We couldn’t check availability. Please try selecting the date again.")
+      })
     return () => { cancelled = true }
-  }, [dateStr])
+  }, [dateStr, setState])
 
   async function handleSubmit(e) {
     e.preventDefault()
     const form = e.currentTarget
     if (!dateStr) return setState({ type: "error", text: "Please choose a preferred date." })
+    if (availability === null) return setState({ type: "error", text: "Please wait while we check availability." })
+    if (availabilityError) return setState({ type: "error", text: availabilityError })
+    if (!timeSlot || availability[timeSlot] !== true) {
+      return setState({ type: "error", text: "Please choose an available time slot." })
+    }
     const formData = new FormData(form)
     const { ok } = await run({
       service: SERVICES.find((s) => s.id === service).label,
@@ -182,6 +199,7 @@ export default function BookingSection() {
     if (ok) {
       form.reset()
       setDate(null)
+      setTimeSlot(TIME_SLOTS[0])
     }
   }
 
@@ -239,10 +257,14 @@ export default function BookingSection() {
                       key={slot}
                       slot={slot}
                       checked={timeSlot === slot}
-                      available={availability[slot] !== false}
+                      status={availabilityError ? "Unavailable" : availability === null ? (dateStr ? "Checking…" : "Choose date") : availability[slot] ? "Available" : "Booked"}
                       onChange={() => setTimeSlot(slot)}
                     />
                   ))}
+                  {availabilityError && <p role="alert" className="text-sm text-[#ba1a1a]">{availabilityError}</p>}
+                  {availability && !availabilityError && !TIME_SLOTS.some((slot) => availability[slot]) && (
+                    <p role="status" className="text-sm text-[#5f5e5e]">No times are available on this date. Please choose another date.</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -291,4 +313,3 @@ export default function BookingSection() {
     </section>
   );
 }
-

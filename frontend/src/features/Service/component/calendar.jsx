@@ -54,9 +54,8 @@ export default function BookingCalendar({
   disabledDates = [],
 }) {
   const today = useMemo(() => {
-    const d = new Date();
-    d.setHours(0, 0, 0, 0);
-    return d;
+    const now = new Date();
+    return new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
   }, []);
 
   const floor = minDate ?? today;
@@ -153,7 +152,9 @@ export default function BookingCalendar({
       padding: "16px",
       fontFamily: "Inter, sans-serif",
       userSelect: "none",
-      minWidth: 260,
+      boxSizing: "border-box",
+      width: "100%",
+      minWidth: 0,
     },
     header: {
       display: "flex",
@@ -221,8 +222,10 @@ export default function BookingCalendar({
 
       return {
         padding: "8px 4px",
+        width: "100%",
         fontSize: 14,
         lineHeight: 1,
+        fontFamily: "inherit",
         background: bg,
         color,
         border,
@@ -261,6 +264,8 @@ export default function BookingCalendar({
         </span>
         <div style={s.navGroup}>
           <button
+            type="button"
+            disabled={!canGoPrev}
             style={s.navBtn(!canGoPrev)}
             onClick={canGoPrev ? prevMonth : undefined}
             aria-label="Previous month"
@@ -268,6 +273,7 @@ export default function BookingCalendar({
             <ChevronLeft size={18} />
           </button>
           <button
+            type="button"
             style={s.navBtn(false)}
             onClick={nextMonth}
             aria-label="Next month"
@@ -287,23 +293,28 @@ export default function BookingCalendar({
       {/* Date grid */}
       <div style={s.grid}>
         {cells.map((cell, idx) => (
-          <div
+          <button
+            type="button"
+            disabled={isDisabled(cell)}
             key={idx}
             style={cellStyle(cell, idx)}
             onClick={() => handleSelect(cell)}
             onMouseEnter={() => !isDisabled(cell) && setHovered(idx)}
             onMouseLeave={() => setHovered(null)}
-            role={isDisabled(cell) ? undefined : "button"}
             aria-label={
               cell.type === "current"
-                ? `${cell.day} ${MONTH_NAMES[viewMonth]} ${viewYear}`
+                ? new Date(viewYear, viewMonth, cell.day).toLocaleDateString("en", {
+                    weekday: "long",
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })
                 : undefined
             }
             aria-pressed={isSelected(cell) || undefined}
-            aria-disabled={isDisabled(cell) || undefined}
           >
             {cell.day}
-          </div>
+          </button>
         ))}
       </div>
 
@@ -333,4 +344,3 @@ export default function BookingCalendar({
     </div>
   );
 }
-

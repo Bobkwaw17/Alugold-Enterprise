@@ -1,4 +1,4 @@
-import { Globe, SendHorizonal, Share2Icon } from "lucide-react";
+import { Mail, Phone, SendHorizonal } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { api } from "../../lib/api";
@@ -22,7 +22,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="flex w-screen min-h-10 bg-(--inverse-surface) text-(--on-tertiary) flex-col">
+    <footer className="flex min-h-10 w-full flex-col bg-(--inverse-surface) text-(--on-tertiary)">
       <div className="max-w-7xl w-full px-6 py-12 mx-auto grid grid-cols-1 lg:grid-cols-[1fr_15%_15%_25%] md:grid-cols-[1fr_20%_20%] gap-4">
 
         <div className="flex flex-col gap-6 ">
@@ -30,14 +30,6 @@ export default function Footer() {
           <p className="lg:max-w-150 text-(--inverse-on-surface) opacity-70">
             {t("site_tagline")}
           </p>
-          <div className="flex w-full gap-2 h-10">
-            <button className="h-full aspect-square rounded-xl items-center flex justify-center border border-(--outline)/30 cursor-pointer hover:bg-white/10 transition-all duration-150">
-              <Globe size={18} />
-            </button>
-            <button className="h-full aspect-square rounded-xl items-center flex justify-center border border-(--outline)/30 cursor-pointer hover:bg-white/10 transition-all duration-150">
-              <Share2Icon size={18} />
-            </button>
-          </div>
         </div>
 
         <div className="flex flex-col gap-1.5 ">
@@ -45,36 +37,39 @@ export default function Footer() {
           <ul className="flex flex-col gap-1">
             <li><Link className="hover:opacity-90 transition-all duration-150  opacity-70" to="/about">About Us</Link></li>
             <li><Link className="hover:opacity-90 transition-all duration-150  opacity-70" to="/service">Services</Link></li>
-            <li><Link className="hover:opacity-90 transition-all duration-150  opacity-70" to="#projects">Projects</Link></li>
+            <li><Link className="hover:opacity-90 transition-all duration-150 opacity-70" to="/about#portal">Client Portal</Link></li>
             <li><button className="cursor-pointer hover:opacity-90 transition-all duration-150 opacity-70" onClick={() => openModal("contact")}>Contact Us</button></li>
           </ul>
         </div>
 
-        <div className="flex flex-col gap-1.5 ">
-          <h4 className="font-semibold text-(--primary) ">Legal</h4>
-          <ul className="flex flex-col gap-1">
-            <li><Link className="hover:opacity-90 transition-all duration-150  opacity-70" to="#">Privacy Policy</Link></li>
-            <li><Link className="hover:opacity-90 transition-all duration-150  opacity-70" to="#">Terms of Service</Link></li>
-            <li><Link className="hover:opacity-90 transition-all duration-150  opacity-70" to="#">Project Tracking</Link></li>
-          </ul>
+        <div className="flex flex-col gap-1.5">
+          <h4 className="font-semibold text-(--primary)">Contact</h4>
+          <a className="flex items-start gap-2 break-all text-sm opacity-70 transition-opacity hover:opacity-100" href={`mailto:${t("contact_email")}`}>
+            <Mail size={16} className="mt-0.5 shrink-0" />
+            {t("contact_email")}
+          </a>
+          <a className="flex items-start gap-2 text-sm opacity-70 transition-opacity hover:opacity-100" href={`tel:${t("contact_hotline").replace(/[^\d+]/g, "")}`}>
+            <Phone size={16} className="mt-0.5 shrink-0" />
+            {t("contact_hotline")}
+          </a>
         </div>
 
         <div className="flex flex-col gap-3 ">
           <h4 className="font-semibold text-(--primary) ">Newsletter</h4>
           <div className="flex flex-col gap-4">
             <form onSubmit={subscribe} className="flex gap-2 items-center ">
-              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your Email" className="p-2 bg-(--surface-container) text-(--on-surface) w-full border border-(--outline)/20 outline-0 focus-within:ring-2 ring-(--primary)" />
-              <button disabled={busy} aria-label="Subscribe" className="p-3.5 flex items-center justify-center bg-(--primary) text-(--on-primary) cursor-pointer hover:opacity-70 disabled:opacity-50 transition-all duration-150">
+              <input type="email" required aria-label="Email address" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your Email" className="p-2 bg-(--surface-container) text-(--on-surface) w-full border border-(--outline)/20 outline-0 focus-within:ring-2 ring-(--primary)" />
+              <button type="submit" disabled={busy} aria-label="Subscribe" className="p-3.5 flex items-center justify-center bg-(--primary) text-(--on-primary) cursor-pointer hover:opacity-70 disabled:opacity-50 transition-all duration-150">
                 <SendHorizonal size={15} />
               </button>
             </form>
-            {state && <p role="status" className={state.type === "error" ? "text-red-300 text-sm" : "text-(--primary-fixed) text-sm"}>{state.text}</p>}
+            {state && <p role={state.type === "error" ? "alert" : "status"} className={state.type === "error" ? "text-red-300 text-sm" : "text-(--primary-fixed) text-sm"}>{state.text}</p>}
             <p className="opacity-70">Get the latest architectural insight and project updates.</p>
           </div>
         </div>
       </div>
-      <div className="border-t border-(--outline)/50 min-h-15 flex items-center p-4 justify-center text-sm gap-2 tracking-widest" >
-        <span className="opacity-70">© {new Date().getFullYear()} ALUGOLD ENTERPRICE · Architectural Excellence Gauranteed.</span>
+      <div className="flex min-h-15 items-center justify-center border-t border-(--outline)/50 p-4 text-center text-xs leading-relaxed tracking-widest sm:text-sm">
+        <span className="opacity-70">© {new Date().getFullYear()} ALUGOLD ENTERPRISE · Architectural Excellence Guaranteed.</span>
       </div>
     </footer>
   )

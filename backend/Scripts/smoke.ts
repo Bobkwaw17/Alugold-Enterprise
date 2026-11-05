@@ -1,4 +1,4 @@
-// Smoke test. Offline checks always run; the full flow runs when MONGODB_URL (+ ADMIN_EMAIL/PASSWORD seeded) is set.
+// Smoke test. Offline checks always run; the full flow runs when MONGODB_URI (+ ADMIN_EMAIL/PASSWORD seeded) is set.
 //   npm test
 import "dotenv/config";
 process.env.NODE_ENV = "test";
@@ -49,8 +49,8 @@ async function main() {
   check("bad token -> 401", (await call("GET", "/api/projects", undefined, "garbage")).status === 401);
 
   // ---- full flow (needs DB) ----
-  if (process.env.MONGODB_URL && process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD) {
-    await mongoose.connect(process.env.MONGODB_URL);
+  if (process.env.MONGODB_URI && process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD) {
+    await mongoose.connect(process.env.MONGODB_URI);
     const date = "2999-06-15";
     const slot = "11:00 AM – 12:30 PM";
     const login = await call("POST", "/api/auth/login", { email: process.env.ADMIN_EMAIL, password: process.env.ADMIN_PASSWORD });
@@ -91,7 +91,7 @@ async function main() {
     await mongoose.connection.collection("quotes").deleteMany({ email: "q@t.co" });
     await mongoose.disconnect();
   } else {
-    console.log("SKIP  full flow (set MONGODB_URL, ADMIN_EMAIL, ADMIN_PASSWORD and run `npm run seed` first)");
+    console.log("SKIP  full flow (set MONGODB_URI, ADMIN_EMAIL, ADMIN_PASSWORD and run `npm run seed` first)");
   }
 
   server.close();

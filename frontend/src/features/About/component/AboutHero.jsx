@@ -11,13 +11,13 @@ export default function AboutHero() {
           <span className="mb-4 block text-[10px] font-bold uppercase tracking-[0.24em] text-[#735c00]">
             {t("about_eyebrow")}
           </span>
-          <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight md:text-5xl">
+          <h1 className="mb-6 font-serif text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
             {t("about_heroTitle")}
           </h1>
           <p className="mb-8 max-w-md text-sm leading-6 text-[#5f5e5e]">
             {t("about_heroBody")}
           </p>
-          <div className="flex gap-8">
+          <div className="flex flex-wrap gap-x-8 gap-y-4">
             {[[t("about_stat1Value"), t("about_stat1Label")], [t("about_stat2Value"), t("about_stat2Label")]].map(([v, l]) => (
               <div key={l} className="border-l-2 border-[#d4af37] pl-3">
                 <div className="text-xl font-bold">{v}</div>

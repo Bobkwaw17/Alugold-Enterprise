@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "build": "npm ci --prefix frontend && npm run build --prefix frontend",
+    "start": "npm start --prefix backend",
+    "dev": "npm run dev --prefix backend",
     "seed": "npm --prefix backend run seed"
   },
   "dependencies": {

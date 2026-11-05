@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import BackDrop from "./BackDrop";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Button";
 import { useUI } from "../../store/ui";
 
@@ -12,12 +12,24 @@ export default function Navbar() {
   const currentRoute = useLocation().pathname;
   const openModal = useUI((s) => s.open)
 
+  useEffect(() => setIsMenu(false), [currentRoute])
+  useEffect(() => {
+    if (!isMenu) return
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setIsMenu(false)
+    }
+    document.addEventListener("keydown", closeOnEscape)
+    return () => document.removeEventListener("keydown", closeOnEscape)
+  }, [isMenu])
+
   return (
-    <nav className="w-screen h-17.5 bg-white gap-3 fixed top-0 left-0 z-99 md:border-b border-(--outline-variant)/30">
-      <div className="h-full max-w-7xl px-4 flex items-center mx-auto z-100 border-b border-gray-500/30 md:border-0">
+    <nav className="fixed left-0 top-0 z-[100] h-[4.375rem] w-full border-b border-(--outline-variant)/30 bg-white">
+      <div className="relative z-50 mx-auto flex h-full max-w-7xl items-center border-b border-gray-500/30 px-4 md:border-0">
         {/* Left part of the Navbar */}
-        <div className="flex flex-1 bg-white h-full items-center ">
-          <h1 className="text-2xl font-bold">ALUGOLD</h1>
+        <div className="flex h-full flex-1 items-center">
+          <Link to="/" aria-label="Alugold home" className="font-serif text-xl font-bold tracking-[0.12em] text-[#1a1c1c] sm:text-2xl">
+            ALUGOLD
+          </Link>
         </div>
 
         {/* Middle part fo the navbar */}
@@ -38,45 +50,45 @@ export default function Navbar() {
         </div>
 
         {/* Right part of the navbar */}
-        <div className="flex flex-1 justify-end bg-white h-full items-center">
+        <div className="flex h-full flex-1 items-center justify-end">
           {/* Hide quotes button and show hamburger menu on smaller screens */}
           <Button className="md:flex hidden px-6 py-2 uppercase tracking-widest" type="inverse-primary" onClick={() => openModal("quote")}>Get Quote</Button>
-          <button className="flex md:hidden cursor-pointer" onClick={() => { setIsMenu(prev => !prev) }}>
-            <Menu />
+          <button
+            type="button"
+            className="grid h-11 w-11 place-items-center rounded-sm text-[#1a1c1c] transition-colors hover:bg-[#f3f3f4] md:hidden"
+            aria-label={isMenu ? "Close menu" : "Open menu"}
+            aria-expanded={isMenu}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsMenu((prev) => !prev)}
+          >
+            {isMenu ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
       {/* Nav dropdown menu on smaller screens  */}
-      <AnimatePresence>{isMenu && <BackDrop className={`md:hidden`} setIsMenu={setIsMenu} />}</AnimatePresence>
+      <AnimatePresence>{isMenu && <BackDrop className="md:hidden" setIsMenu={setIsMenu} />}</AnimatePresence>
       <AnimatePresence>
         {isMenu && <motion.div
-          initial={{ y: "-100%" }}
-          animate={{ y: -0.5 }}
-          exit={{ y: "-100%" }}
-          transition={{ type: "spring", stiffness: 300, damping: 30, mass: 0.8 }}
-          className={`
-            absolute top-17.5 h-60 w-full bg-white -z-1 md:hidden flex flex-col p-4 items-center justify-between font-semibold
-          `}>
-          <Link to="/" className={`
-            hover:text-(--on-surface-variant)
-            ${currentRoute === "/" ? "border-b-2 border-(--outline) text-(--on-surface-variant)" : ""}`}
-            onClick={() => { setIsMenu(false) }}>
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.16 }}
+          id="mobile-navigation"
+          className="absolute left-0 top-full z-50 flex w-full flex-col gap-1 border-t border-[#d0c5af]/30 bg-white p-4 font-semibold shadow-xl md:hidden">
+          <Link to="/" className={`rounded-sm px-4 py-3 hover:bg-[#f3f3f4] ${currentRoute === "/" ? "bg-[#f3f3f4] text-(--on-surface-variant)" : ""}`}
+            onClick={() => setIsMenu(false)}>
             Home
           </Link>
-          <Link to="/service" className={`
-            hover:text-(--on-surface-variant)
-            ${currentRoute === "/service" ? "border-b-2 border-(--outline) text-(--on-surface-variant)" : ""}`}
-            onClick={() => { setIsMenu(false) }}>
+          <Link to="/service" className={`rounded-sm px-4 py-3 hover:bg-[#f3f3f4] ${currentRoute === "/service" ? "bg-[#f3f3f4] text-(--on-surface-variant)" : ""}`}
+            onClick={() => setIsMenu(false)}>
             Service
           </Link>
-          <Link to="/about" className={`
-            hover:text-(--on-surface-variant)
-            ${currentRoute === "/about" ? "border-b-2 border-(--outline) text-(--on-surface-variant)" : ""}`}
-            onClick={() => { setIsMenu(false) }}>
+          <Link to="/about" className={`rounded-sm px-4 py-3 hover:bg-[#f3f3f4] ${currentRoute === "/about" ? "bg-[#f3f3f4] text-(--on-surface-variant)" : ""}`}
+            onClick={() => setIsMenu(false)}>
             About
           </Link>
-          <Button className="p-2 w-full uppercase tracking-widest" type={"inverse-primary"} onClick={() => { setIsMenu(false); openModal("quote") }}>Get Quote</Button>
+          <Button className="mt-2 w-full px-4 py-3 uppercase tracking-widest" type="inverse-primary" onClick={() => { setIsMenu(false); openModal("quote") }}>Get Quote</Button>
 
         </motion.div>}
       </AnimatePresence>

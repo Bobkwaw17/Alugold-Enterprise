@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { NavLink, Navigate, Route, Routes } from "react-router-dom"
 import {
-  LayoutDashboard, CalendarCheck, FileText, Mail, Users, FolderKanban, Layers, PenLine, LogOut, ExternalLink, Menu,
+  LayoutDashboard, CalendarCheck, FileText, Mail, Users, FolderKanban, Layers, PenLine, LogOut, ExternalLink, Menu, X,
 } from "lucide-react"
 import { useAuth } from "../../store/auth"
 import { useSubmit } from "../../lib/useSubmit"
@@ -63,10 +63,12 @@ export default function Admin() {
     <div className="min-h-screen bg-[#f9f9f9] text-[#1a1c1c] md:flex">
       <header className="flex items-center justify-between bg-[#2f3131] px-4 py-3 text-white md:hidden">
         <span className="font-bold">ALUGOLD Admin</span>
-        <button aria-label="Menu" onClick={() => setMenu((m) => !m)} className="cursor-pointer"><Menu /></button>
+        <button type="button" aria-label={menu ? "Close menu" : "Open menu"} aria-expanded={menu} aria-controls="admin-navigation" onClick={() => setMenu((m) => !m)} className="grid h-11 w-11 place-items-center cursor-pointer">
+          {menu ? <X /> : <Menu />}
+        </button>
       </header>
 
-      <aside className={`${menu ? "block" : "hidden"} w-full shrink-0 bg-[#2f3131] text-white md:sticky md:top-0 md:block md:h-screen md:w-60`}>
+      <aside id="admin-navigation" className={`${menu ? "block" : "hidden"} w-full shrink-0 bg-[#2f3131] text-white md:sticky md:top-0 md:block md:h-screen md:w-60`}>
         <div className="hidden px-6 py-6 md:block">
           <div className="text-xl font-bold">ALUGOLD</div>
           <div className="text-[10px] uppercase tracking-[0.24em] text-[#e9c349]">Admin</div>

@@ -12,9 +12,9 @@ export default function AppLayout() {
   useEffect(() => { load() }, [load])
 
   return (
-    <div className="w-screen min-h-screen">
+    <div className="min-h-screen w-full overflow-x-clip">
       <Navbar />
-      <main className="flex flex-col max-w-7xl mx-auto mt-17.5">
+      <main className="mx-auto mt-[4.375rem] flex w-full max-w-7xl flex-col">
         <Load><Outlet /></Load>
       </main>
       <Footer />
